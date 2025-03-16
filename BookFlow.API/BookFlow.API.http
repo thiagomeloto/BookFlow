@@ -1,0 +1,6 @@
+@BookFlow.API_HostAddress = http://localhost:5133
+
+GET {{BookFlow.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
