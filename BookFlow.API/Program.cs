@@ -1,5 +1,8 @@
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using BookFlow.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+var connectionString = builder.Configuration.GetConnectionString("DevFreelaCs");
+
+//Registra o DbContext
+builder.Services.AddDbContext<BookFlowDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

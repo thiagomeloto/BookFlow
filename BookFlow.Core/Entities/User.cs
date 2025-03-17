@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Core.Entities
 {
-    public class Usuario
+    public class User
     {
         public int Id { get; private set; }
-        public string Nome { get; private set; }
+        public string Name { get; private set; }
         public string Email { get; private set; }
     }
 }

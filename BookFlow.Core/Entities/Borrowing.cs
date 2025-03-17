@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Core.Entities
 {
-    public class Emprestimo
+    public class Borrowing
     {
         public int Id { get; private set; }
-        public int IdUsuario { get; private set; }
-        public int IdLivro { get; private set; }
-        public DateTime DataEmprestimo { get; private set; }
+        public int IdUser { get; private set; }
+        public int IdBook { get; private set; }
+        public DateTime DateBorrowing { get; private set; }
     }
 }
