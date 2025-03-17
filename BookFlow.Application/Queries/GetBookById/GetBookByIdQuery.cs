@@ -1,4 +1,5 @@
 ﻿using BookFlow.Application.ViewModels;
+using BookFlow.Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Application.Queries.GetBookById
 {
-    public class GetBookByIdQuery : IRequest<BookViewModel>
-    {
-        public GetBookByIdQuery(int id)
-        {
-            Id = id;
-        }
-
-        public int Id { get; private set; }
+    public class GetBookByIdQuery : IRequest<Book>
+    {        
+        public int Id { get; set; }
     }
 }

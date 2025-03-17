@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Application.Commands.CreateBook
 {
-    public class CreateBookCommand : IRequest<Unit>
+    public class CreateBookCommand : IRequest<int>
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Autor { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
         public string ISBN { get; set; }
-        public int AnoPublicacao { get; set; }
+        public int YearPublication { get; set; }
     }
 }

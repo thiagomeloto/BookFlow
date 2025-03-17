@@ -14,8 +14,15 @@ namespace BookFlow.API.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         public async Task<IActionResult> Get()
+        {
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
             return Ok();
         }

@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BookFlow.Core.Entities;
+using BookFlow.Core.Repositories;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +9,20 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Application.Commands.CreateBook
 {
-    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Unit>
+    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, int>
     {
-        public Task<Unit> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        private readonly IBookRepository _bookRepository;
+
+        public CreateBookCommandHandler(IBookRepository bookRepository)
         {
-            throw new NotImplementedException();
+            _bookRepository = bookRepository;
+        }
+
+        public async Task<int> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        {
+            var book = new Book(request.Title, request.Author, request.ISBN, request.YearPublication);
+
+            return await _bookRepository.AddASync(book);                  
         }
     }
 }

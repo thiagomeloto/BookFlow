@@ -3,6 +3,10 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using BookFlow.Infrastructure.Persistence;
+using BookFlow.Core.Repositories;
+using BookFlow.Infrastructure.Persistence.Repositories;
+using BookFlow.Application.Commands.CreateBook;
+using BookFlow.Application.Queries.GetBookById;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +17,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-
 var connectionString = builder.Configuration.GetConnectionString("BookFlowCs");
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBorrowingRepository, BorrowingRepository>();
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssemblies(
+        Assembly.GetExecutingAssembly(),
+        typeof(CreateBookCommand).Assembly,
+        typeof(GetBookByIdQuery).Assembly
+    ));
+
+//Registra todos os assemblies de commands e queries
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 //Registra o DbContext
 builder.Services.AddDbContext<BookFlowDbContext>(options =>

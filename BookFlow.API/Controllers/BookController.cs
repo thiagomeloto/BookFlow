@@ -1,7 +1,9 @@
 ﻿using BookFlow.Application.Commands.CreateBook;
+using BookFlow.Application.Queries.GetBookById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookFlow.API.Controllers
 {
@@ -23,22 +25,22 @@ namespace BookFlow.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            return Ok();
+        public async Task<IActionResult> GetBookById(int id)
+        {            
+            var book = await _mediator.Send(new GetBookByIdQuery { Id = id });
+
+            if (book == null)
+                return NotFound();
+
+            return Ok(book);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateBookCommand command)
         {
-            try
-            {
-                return Ok(command);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+            var bookId = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetBookById), new { id = bookId }, command);
         }
 
         [HttpDelete]
