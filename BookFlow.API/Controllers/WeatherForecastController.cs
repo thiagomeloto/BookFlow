@@ -34,7 +34,6 @@ namespace BookFlow.API.Controllers
         [HttpPost]
         public IActionResult Cadastrar([FromBody] Livro livro)
         {
-            _livroRepository.Adicionar(livro);
             return Ok(new { mensagem = "Livro cadastrado com sucesso!" });
         }
     }
