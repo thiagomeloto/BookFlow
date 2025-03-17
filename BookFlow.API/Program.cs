@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-var connectionString = builder.Configuration.GetConnectionString("DevFreelaCs");
+var connectionString = builder.Configuration.GetConnectionString("BookFlowCs");
 
 //Registra o DbContext
 builder.Services.AddDbContext<BookFlowDbContext>(options =>
