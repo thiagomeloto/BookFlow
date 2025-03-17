@@ -5,6 +5,10 @@ VisualStudioVersion = 17.12.35506.116 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFlow.API", "BookFlow.API\BookFlow.API.csproj", "{2E1C080C-47BE-4DE5-B073-42FD348D9439}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFlow.Core", "BookFlow.Core\BookFlow.Core.csproj", "{7D5ABBD2-B0AE-4044-BB17-CBBDC16571B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookFlow.Application", "BookFlow.Application\BookFlow.Application.csproj", "{3C539F60-C58F-4514-BF9F-28F2D3B0FADB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2E1C080C-47BE-4DE5-B073-42FD348D9439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E1C080C-47BE-4DE5-B073-42FD348D9439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E1C080C-47BE-4DE5-B073-42FD348D9439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5ABBD2-B0AE-4044-BB17-CBBDC16571B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5ABBD2-B0AE-4044-BB17-CBBDC16571B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5ABBD2-B0AE-4044-BB17-CBBDC16571B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5ABBD2-B0AE-4044-BB17-CBBDC16571B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C539F60-C58F-4514-BF9F-28F2D3B0FADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C539F60-C58F-4514-BF9F-28F2D3B0FADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C539F60-C58F-4514-BF9F-28F2D3B0FADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C539F60-C58F-4514-BF9F-28F2D3B0FADB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

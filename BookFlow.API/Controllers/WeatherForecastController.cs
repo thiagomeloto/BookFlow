@@ -1,3 +1,4 @@
+using BookFlow.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookFlow.API.Controllers
@@ -28,6 +29,13 @@ namespace BookFlow.API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        public IActionResult Cadastrar([FromBody] Livro livro)
+        {
+            _livroRepository.Adicionar(livro);
+            return Ok(new { mensagem = "Livro cadastrado com sucesso!" });
         }
     }
 }
