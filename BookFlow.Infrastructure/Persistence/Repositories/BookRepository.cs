@@ -29,8 +29,11 @@ namespace BookFlow.Infrastructure.Persistence.Repositories
         {
             var book = await _dbContext.Books.SingleOrDefaultAsync(p => p.Id == id);
 
-            if(book != null)
+            if (book != null)
+            {
                 _dbContext.Books.Remove(book);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<Book>> GetAllAsync()

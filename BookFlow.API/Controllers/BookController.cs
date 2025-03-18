@@ -1,4 +1,6 @@
 ﻿using BookFlow.Application.Commands.CreateBook;
+using BookFlow.Application.Commands.DeleteBook;
+using BookFlow.Application.Queries.GetAllBooks;
 using BookFlow.Application.Queries.GetBookById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -21,7 +23,9 @@ namespace BookFlow.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var books = await _mediator.Send(new GetAllBooksQuery());
+
+            return Ok(books);
         }
 
         [HttpGet("{id}")]
@@ -43,10 +47,14 @@ namespace BookFlow.API.Controllers
             return CreatedAtAction(nameof(GetBookById), new { id = bookId }, command);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            return Ok();
+            var command = new DeleteBookCommand(id);
+
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

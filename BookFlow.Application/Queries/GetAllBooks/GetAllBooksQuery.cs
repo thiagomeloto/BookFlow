@@ -1,4 +1,5 @@
 ﻿using BookFlow.Application.ViewModels;
+using BookFlow.Core.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Application.Queries.GetAllBooks
 {
-    public class GetAllBooksQuery : IRequest<List<BookViewModel>>
+    public class GetAllBooksQuery : IRequest<List<Book>>
     {
-        public GetAllBooksQuery(string query)
-        {
-            Query = query;
-        }
-
-        public string Query { get; private set; }
+        
     }
 }

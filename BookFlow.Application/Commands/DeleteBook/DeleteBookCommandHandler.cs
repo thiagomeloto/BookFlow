@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BookFlow.Core.Repositories;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,17 @@ namespace BookFlow.Application.Commands.DeleteBook
 {
     public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Unit>
     {
-        public Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+        private readonly IBookRepository _bookRepository;
+
+        public DeleteBookCommandHandler(IBookRepository bookRepository)
         {
-            throw new NotImplementedException();
+            _bookRepository = bookRepository;
+        }
+        public async Task<Unit> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+        {
+            await _bookRepository.DeleteAsync(request.Id);
+
+            return Unit.Value;
         }
     }
 }

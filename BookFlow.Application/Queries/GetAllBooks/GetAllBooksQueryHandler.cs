@@ -1,4 +1,6 @@
 ﻿using BookFlow.Application.ViewModels;
+using BookFlow.Core.Entities;
+using BookFlow.Core.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,19 @@ using System.Threading.Tasks;
 
 namespace BookFlow.Application.Queries.GetAllBooks
 {
-    public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, List<BookViewModel>>
+    public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, List<Book>>
     {
-        public Task<List<BookViewModel>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+        private readonly IBookRepository _bookRepository;
+
+        public GetAllBooksQueryHandler(IBookRepository bookRepository)
         {
-            throw new NotImplementedException();
+            _bookRepository = bookRepository;
+        }
+        public async Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+        {
+            var books =  await _bookRepository.GetAllAsync();
+
+            return books;
         }
     }
 }
