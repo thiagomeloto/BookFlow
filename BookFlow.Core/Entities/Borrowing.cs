@@ -12,5 +12,12 @@ namespace BookFlow.Core.Entities
         public int IdUser { get; private set; }
         public int IdBook { get; private set; }
         public DateTime DateBorrowing { get; private set; }
+
+        public Borrowing(int idUser, int idBook, DateTime dateBorrowing)
+        {
+            IdUser = idUser;
+            IdBook = idBook;
+            DateBorrowing = dateBorrowing;
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace BookFlow.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBookCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateBookCommand command)
         {
             var bookId = await _mediator.Send(command);
 

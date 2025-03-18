@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 namespace BookFlow.Application.Commands.CreateBorrowing
 {
     public class CreateBorrowingCommand : IRequest<int>
-    {
-        public int Id { get; private set; }
-        public int IdUser { get; private set; }
-        public int IdBook { get; private set; }
-        public DateTime DateBorrowing { get; private set; }
+    {        
+        public int IdUser { get; set; }
+        public int IdBook { get; set; }
+        public DateTime DateBorrowing { get; set; }
     }
 }

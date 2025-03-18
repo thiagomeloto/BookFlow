@@ -22,7 +22,7 @@ namespace BookFlow.Application.Commands.CreateBook
         {
             var book = new Book(request.Title, request.Author, request.ISBN, request.YearPublication);
 
-            return await _bookRepository.AddASync(book);                  
+            return await _bookRepository.AddASync(book);
         }
     }
 }

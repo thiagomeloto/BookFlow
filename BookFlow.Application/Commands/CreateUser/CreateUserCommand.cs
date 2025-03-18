@@ -9,8 +9,7 @@ namespace BookFlow.Application.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<int>
     {        
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string Email { get; private set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
     }
 }

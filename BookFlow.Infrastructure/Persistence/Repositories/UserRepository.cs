@@ -1,5 +1,6 @@
 ﻿using BookFlow.Core.Entities;
 using BookFlow.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,31 @@ namespace BookFlow.Infrastructure.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public Task<int> AddASync(User user)
+        private readonly BookFlowDbContext _dbContext;
+
+        public UserRepository(BookFlowDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task<int> AddASync(User user)
         {
-            throw new NotImplementedException();
+            await _dbContext.Users.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+
+            return user.Id;
         }
 
-        public Task<User> GetUserByIdAsync(int id)
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.ToListAsync();
+        }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            var user = await _dbContext.Users.SingleOrDefaultAsync(p => p.Id == id);
+
+            return user;
         }
     }
 }

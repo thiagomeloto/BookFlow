@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BookFlow.Core.Entities;
+using BookFlow.Core.Repositories;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,18 @@ namespace BookFlow.Application.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        public Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        private readonly IUserRepository _userRepository;
+
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+        }
+
+        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = new User(request.Name, request.Email);
+
+            return await _userRepository.AddASync(user);
         }
     }
 }

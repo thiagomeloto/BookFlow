@@ -1,4 +1,7 @@
 ﻿using BookFlow.Application.Commands.CreateUser;
+using BookFlow.Application.Queries.GetAllUsers;
+using BookFlow.Application.Queries.GetBookById;
+using BookFlow.Application.Queries.GetUserById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,19 +21,28 @@ namespace BookFlow.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var users = await _mediator.Send(new GetAllUsersQuery());
+
+            return Ok(users);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetUserById(int id)
         {
-            return Ok();
+            var user = await _mediator.Send(new GetUserByIdQuery { Id = id });
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateUserCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
-            return Ok();
+            var userId = await _mediator.Send(command);
+
+            return CreatedAtAction(nameof(GetUserById), new { id = userId }, command);
         }
     }
 }

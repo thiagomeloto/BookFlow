@@ -10,5 +10,6 @@ namespace BookFlow.Core.Repositories
     public interface IBorrowingRepository
     {
         Task<int> AddASync(Borrowing borrowing);
+        Task<Borrowing> GetByIdAsync(int id);
     }
 }

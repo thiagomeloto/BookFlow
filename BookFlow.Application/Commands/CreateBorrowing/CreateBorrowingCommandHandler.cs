@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BookFlow.Core.Entities;
+using BookFlow.Core.Repositories;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,17 @@ namespace BookFlow.Application.Commands.CreateBorrowing
 {
     public class CreateBorrowingCommandHandler : IRequestHandler<CreateBorrowingCommand, int>
     {
-        public Task<int> Handle(CreateBorrowingCommand request, CancellationToken cancellationToken)
+        private readonly IBorrowingRepository _borrowingRepository;
+
+        public CreateBorrowingCommandHandler(IBorrowingRepository borrowingRepository)
         {
-            throw new NotImplementedException();
+            _borrowingRepository = borrowingRepository;
+        }
+        public async Task<int> Handle(CreateBorrowingCommand request, CancellationToken cancellationToken)
+        {
+            var borrowing = new Borrowing(request.IdUser, request.IdBook, request.DateBorrowing);
+
+            return await _borrowingRepository.AddASync(borrowing);
         }
     }
 }
