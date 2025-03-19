@@ -8,6 +8,8 @@ using BookFlow.Infrastructure.Persistence.Repositories;
 using BookFlow.Application.Commands.CreateBook;
 using BookFlow.Application.Queries.GetBookById;
 using BookFlow.Application.Commands.CreateUser;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,9 @@ builder.Services.AddMediatR(cfg =>
         typeof(GetBookByIdQuery).Assembly,
         typeof(CreateUserCommand).Assembly
     ));
+
+builder.Services.AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<CreateBookCommand>();
 
 //Registra todos os assemblies de commands e queries
 //builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
